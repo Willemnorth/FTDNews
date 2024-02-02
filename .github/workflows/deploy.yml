@@ -26,7 +26,7 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'your-azure-web-app-name'  # Replace with your Azure Web App name
+          app-name: 'FTDNews'  # Replace with your Azure Web App name
           slot-name: 'production'  # Replace with your deployment slot name if applicable
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # Set this secret in your GitHub repository
           package: '.'  # Path to your Flask application code
