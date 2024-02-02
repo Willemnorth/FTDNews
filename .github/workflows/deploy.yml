@@ -13,11 +13,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'  # Set your desired Node.js version here
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -34,4 +29,4 @@ jobs:
           app-name: 'FTDNews'  # Replace with your Azure Web App name
           slot-name: 'production'  # Replace with your deployment slot name if applicable
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # Set this secret in your GitHub repository
-          package: '.'
+          package: '.'  # Path to your Flask application code
