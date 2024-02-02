@@ -3,6 +3,12 @@ from newsapi import NewsApiClient
 
 app = Flask(__name__)
 
+@app.route('/health')
+def health_check():
+    # Perform any necessary health checks here
+    # For simplicity, just return 'OK' if the application is healthy
+    return 'OK', 200
+    
 # Initialize News API client
 newsapi = NewsApiClient(api_key='ec6bfaf809a74feab621d4d359f13f00')
 
