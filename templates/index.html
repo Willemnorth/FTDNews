@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News application</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Your existing CSS file -->
+    <link rel="stylesheet" href="../static/home.css">
+</head>
+<body>
+<!-- Navigation menu containing categories -->
+<nav class="menu fixed-top">
+    <ul class="categories">
+        <li><a href="#" class="category-link" data-category="general">General</a></li>
+        <li><a href="#" class="category-link" data-category="business">Business</a></li>
+        <li><a href="#" class="category-link" data-category="entertainment">Entertainment</a></li>
+        <li><a href="#" class="category-link" data-category="health">Health</a></li>
+        <li><a href="#" class="category-link" data-category="science">Science</a></li>
+        <li><a href="#" class="category-link" data-category="sports">Sports</a></li>
+        <li><a href="#" class="category-link" data-category="technology">Technology</a></li>
+    </ul>
+    <!-- Search bar -->
+    <div class="search-bar">
+        <form id="search-form" action="/" method="post">
+            <div class="input-group">
+                <input type="text" class="form-control rounded-pill" name="keyword" placeholder="Search">
+            </div>
+        </form>
+    </div>
+</nav>
+
+<hr class="header-divider">
+
+<header class="logo-header">
+    <img src="../static/blacklogo2.png" alt="Website Logo">
+</header>
+<div class="container mt-5" id="news-container">
+    <div class="row" id="top-articles">
+        <!-- Top 5 articles will be populated dynamically here -->
+    </div>
+
+    <hr> <!-- Add a horizontal line to separate top articles and category articles -->
+
+    <div class="row" id="category-articles">
+        <!-- Articles based on category will be populated dynamically here -->
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Your existing JavaScript file -->
+<script src="../static/home.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Fetch and display top 5 articles on page load
+        try {
+            const response = await fetch('/');
+            const data = await response.json();
+
+            const topArticlesContainer = document.getElementById('top-articles');
+
+            data.all_headlines.forEach(article => {
+                const articleDiv = document.createElement('div');
+                articleDiv.classList.add('col-md-4');
+                articleDiv.innerHTML = `
+                    <div class="card mb-4">
+                        <img src="${article['urlToImage']}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${article['title']}</h5>
+                            <p class="card-text">${article['description']}</p>
+                            <a href="${article['url']}" class="btn btn-primary" target="_blank">Read More</a>
+                        </div>
+                    </div>
+                `;
+                topArticlesContainer.appendChild(articleDiv);
+            });
+        } catch (error) {
+            console.error('Error fetching top articles:', error);
+        }
+
+        // Add event listener to category links
+        const categoryLinks = document.querySelectorAll('.category-link');
+        categoryLinks.forEach(link => {
+            link.addEventListener('click', async (event) => {
+                event.preventDefault();
+                const category = link.getAttribute('data-category');
+                const categoryURL = `/search?category=${category}`;
+                
+                try {
+                    const response = await fetch(categoryURL);
+                    const data = await response.json();
+
+                    // Clear existing category articles
+                    const categoryArticlesContainer = document.getElementById('category-articles');
+                    categoryArticlesContainer.innerHTML = '';
+
+                    // Populate category articles
+                    data.category_articles.forEach(article => {
+                        const articleDiv = document.createElement('div');
+                        articleDiv.classList.add('col-md-6');
+                        articleDiv.innerHTML = `
+                            <div class="card mb-4">
+                                <img src="${article['urlToImage']}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">${article['title']}</h5>
+                                    <p class="card-text">${article['description']}</p>
+                                    <a href="${article['url']}" class="btn btn-primary" target="_blank">Read More</a>
+                                </div>
+                            </div>
+                        `;
+                        categoryArticlesContainer.appendChild(articleDiv);
+                    });
+                } catch (error) {
+                    console.error('Error fetching category articles:', error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

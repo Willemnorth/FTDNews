@@ -1,0 +1,84 @@
+/* Styling for the navigation menu */
+.menu {
+    background-color: #f8f9fa; /* Off-white background color for the menu */
+    color: #333; /* Text color for the menu */
+    padding: 10px 20px; /* Padding around the menu content */
+    position: fixed; /* Fixed positioning */
+    top: 0; /* Align at the top of the screen */
+    left: 0; /* Align at the left of the screen */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Stack order */
+    display: flex; /* Use flexbox to align items */
+    justify-content: space-between; /* Align items with space between them */
+    align-items: center; /* Center items vertically */
+}
+
+/* Styling for the categories list */
+.menu ul.categories {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    text-align: center; /* Center align text */
+}
+
+/* Styling for each list item */
+.menu ul.categories li {
+    display: inline-block; /* Display as inline block */
+    margin-right: 20px; /* Add some margin between categories */
+}
+
+/* Styling for category links */
+.menu ul.categories li a {
+    color: #000; /* Black text color for category links */
+    text-decoration: none; /* Remove underline */
+    padding: 5px 10px; /* Add padding to links */
+    border-radius: 20px; /* Oval shape for hover effect */
+}
+
+/* Hover effect for category links */
+.menu ul.categories li a:hover {
+    background-color: #ddd; /* Light grey background color on hover */
+}
+
+/* Styling for the search bar */
+.search-bar {
+    margin-right: 20px; /* Add margin to the right */
+}
+
+.search-bar .input-group {
+    width: 300px; /* Adjust width as needed */
+}
+
+.search-bar input {
+    border-radius: 30px; /* Rounded corners */
+    border: none; /* Remove border */
+    padding: 10px 15px; /* Add padding */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    transition: box-shadow 0.3s ease; /* Add transition for smoothness */
+}
+
+.search-bar input:focus {
+    outline: none; /* Remove outline on focus */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Update shadow on focus */
+}
+
+/* Styling for the logo header */
+.logo-header {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 150px; /* Adjust height as needed */
+    background-color: #f8f9fa; /* Same background color as the menu */
+    margin-top: 50px; /* Add some top margin to push the logo down */
+}
+
+.logo-header img {
+    max-width: 100%; /* Ensure the logo does not overflow */
+    max-height: 100%; /* Ensure the logo does not overflow */
+}
+
+.header-divider {
+    border-top: 7px solid black; 
+    margin-top: 10px; /* Adjust margin as needed */
+    margin-bottom: 10px; /* Adjust margin as needed */
+}
